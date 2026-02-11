@@ -11,7 +11,7 @@ A professional Kanban-based task management application. This system allows user
 | S.No | Name | Roll No. | Role |
 | --- | --- | --- | --- |
 | 1 | Govind Singh | 2400520100036 | Database + Backend Developer |
-| 2 | [Name] | [Roll No.] | Frontend Developer |
+| 2 | [Anshuman Singh] | [2400520100017] | Frontend Developer |
 | 3 | [Name] | [Roll No.] | Frontend Developer |
 | 4 | [Name] | [Roll No.] | Frontend Developer |
 
