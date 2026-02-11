@@ -12,8 +12,8 @@ A professional Kanban-based task management application. This system allows user
 | --- | --- | --- | --- |
 | 1 | Govind Singh | 2400520100036 | Database + Backend Developer |
 | 2 | Anshuman Singh | 2400520100017 | Frontend Developer |
-| 3 | ANKIT PRAJAPATI | 2400520100014 | Frontend Developer |
-| 4 | [Name] | [Roll No.] | Frontend Developer |
+| 3 | Ankit Prajapati | 2400520100014 | Frontend Developer |
+| 4 | Abhist Kumbhaj Pandey | 2400520100007 | Frontend Developer |
 
 ---
 
