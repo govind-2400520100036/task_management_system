@@ -1,6 +1,8 @@
 \documentclass{beamer}
 \usetheme{Madrid}
 
+\usepackage{booktabs}   % For professional tables
+
 \title{Task Management System}
 \subtitle{A Lightweight Productivity Web Application}
 
@@ -55,10 +57,7 @@ IET Lucknow
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Comparison with Existing Systems}
-
-% Slide 5 -  Architecture
-
+% Slide 5 - System Architecture
 \begin{frame}{System Architecture}
 \begin{block}{Frontend}
 HTML, CSS, JavaScript – User Interface
@@ -69,7 +68,7 @@ FastAPI – API handling, authentication, logic
 \end{block}
 
 \begin{block}{Database}
-SQLite3 – Task & User data storage
+SQLite3 – Task \& User data storage
 \end{block}
 \end{frame}
 
@@ -85,7 +84,7 @@ SQLite3 – Task & User data storage
 \end{frame}
 
 % Slide 7 - Comparison
-
+\begin{frame}{Comparison with Existing Systems}
 \begin{tabular}{lccc}
 \toprule
 Feature & Trello/Asana & Notion & Our System \\
@@ -97,20 +96,16 @@ Lightweight Design & No & No & Yes \\
 Learning Purpose & No & No & Yes \\
 \bottomrule
 \end{tabular}
-
 \end{frame}
 
-%Slide 9 - Timeline
-
+% Slide 8 - Timeline
 \begin{frame}{Project Timeline (1 Month Plan)}
-
 \begin{itemize}
     \item \textbf{Week 1:} Requirement Analysis and System Design
     \item \textbf{Week 2:} Frontend Development (UI Implementation)
     \item \textbf{Week 3:} Backend Development and Database Integration
     \item \textbf{Week 4:} Testing, Security Implementation, and Deployment Preparation
 \end{itemize}
-
 \end{frame}
 
 % Slide 9 - Current Status
