@@ -4,21 +4,23 @@
 \usepackage{booktabs}   % For professional tables
 
 \title{Task Management System}
-\subtitle{A Lightweight Productivity Web Application}
+\subtitle{A Lightweight Productivity Web Application }
 
-\author{
-Abhist Kumbhaj Pandey (2400520100007) \\
-Ankit Prajapati (2400520100014) \\
-Anshuman Singh (2400520100017) \\
-Govind Singh (2400520100036)
+\author[TaskFlow]{
+    \textbf{Group: TaskFlow} \\ \medskip
+    Abhist Kumbhaj Pandey (2400520100007) \\
+    Ankit Prajapati (2400520100014) \\
+    Anshuman Singh (2400520100017) \\
+    Govind Singh (2400520100036)
 }
 
-\institute{
-Branch: CSE-R \\
-IET Lucknow
+\institute[]{
+    Branch: CSE-R \\
+    IET Lucknow
 }
 
-\date{\today}
+% Replaced date with Project ID
+\date{INC-454}
 
 \begin{document}
 
@@ -49,16 +51,17 @@ IET Lucknow
 % Slide 4 - Tech Stack 
 \begin{frame}{Technology Stack}
 \begin{itemize}
-    \item Frontend: HTML, CSS, JavaScript
-    \item Backend: FastAPI (Python-based framework)
-    \item Database: SQLite3
-    \item Security: Password Hashing
-    \item Configuration: Environment Variables
+    \item \textbf{Frontend:} HTML, CSS, JavaScript
+    \item \textbf{Backend:} FastAPI (Python-based framework)
+    \item \textbf{Database:} SQLite3
+    \item \textbf{Security:} Password Hashing (Passlib/Bcrypt)
+    \item \textbf{Configuration:} Environment Variables (.env)
 \end{itemize}
 \end{frame}
 
 % Slide 5 - System Architecture
 \begin{frame}{System Architecture}
+
 \begin{block}{Frontend}
 HTML, CSS, JavaScript – User Interface
 \end{block}
@@ -85,15 +88,16 @@ SQLite3 – Task \& User data storage
 
 % Slide 7 - Comparison
 \begin{frame}{Comparison with Existing Systems}
+\centering
 \begin{tabular}{lccc}
 \toprule
-Feature & Trello/Asana & Notion & Our System \\
+Feature & Trello/Asana & Notion & \textbf{TaskFlow} \\
 \midrule
-Complexity & High & Moderate & Low \\
-Customization & High & High & Basic \\
-Ease of Use & Moderate & Moderate & High \\
-Lightweight Design & No & No & Yes \\
-Learning Purpose & No & No & Yes \\
+Complexity & High & Moderate & \textbf{Low} \\
+Customization & High & High & \textbf{Basic} \\
+Ease of Use & Moderate & Moderate & \textbf{High} \\
+Lightweight Design & No & No & \textbf{Yes} \\
+Learning Purpose & No & No & \textbf{Yes} \\
 \bottomrule
 \end{tabular}
 \end{frame}
@@ -122,8 +126,8 @@ Learning Purpose & No & No & Yes \\
 % Slide 10 - Future Scope
 \begin{frame}{Future Scope}
 \begin{itemize}
-    \item Cloud deployment for remote access
-    \item Role-based user authentication
+    \item Cloud deployment (Render/Railway) for remote access
+    \item Role-based user access control
     \item Real-time task updates
     \item Mobile responsive interface
     \item Integration with AI-based task prioritization
