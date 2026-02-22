@@ -57,6 +57,33 @@ IET Lucknow
 
 \begin{frame}{Comparison with Existing Systems}
 
+% Slide 5 -  Architecture
+
+\begin{frame}{System Architecture}
+\begin{block}{Frontend}
+HTML, CSS, JavaScript – User Interface
+\end{block}
+
+\begin{block}{Backend}
+FastAPI – API handling, authentication, logic
+\end{block}
+
+\begin{block}{Database}
+SQLite3 – Task & User data storage
+\end{block}
+\end{frame}
+
+% Slide 6 - Security
+\begin{frame}{Security Implementation}
+\begin{itemize}
+    \item Secure user authentication system
+    \item Password hashing before database storage
+    \item Environment variables for secret configuration
+    \item Database file excluded from version control
+    \item Input validation at backend layer
+\end{itemize}
+\end{frame}
+
 % Slide 7 - Comparison
 
 \begin{tabular}{lccc}
