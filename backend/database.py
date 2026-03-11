@@ -25,6 +25,7 @@ def init_db():
     cur.execute("""
     CREATE TABLE IF NOT EXISTS User(
         username TEXT PRIMARY KEY,
+        email TEXT UNIQUE,
         password TEXT NOT NULL
     )
     """)
@@ -36,6 +37,8 @@ def init_db():
         task_name TEXT,
         priority TEXT,
         status TEXT,
+        deadline TEXT,
+        reminder_sent INTEGER DEFAULT 0,
         FOREIGN KEY(username) REFERENCES User(username)
     )
     """)
