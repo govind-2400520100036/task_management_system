@@ -6,11 +6,17 @@ import bcrypt
 import os
 from dotenv import load_dotenv
 from database import get_connection, init_db
+import smtplib
+from email.mime.text import MIMEText
+from datetime import datetime, timedelta
+from apscheduler.schedulers.background import BackgroundScheduler
 
 load_dotenv()
 
 SECRET = os.getenv("JWT_SECRET")
 ALGORITHM = os.getenv("ALGORITHM")
+EMAIL_USER = os.getenv("EMAIL_USER")
+EMAIL_PASS = os.getenv("EMAIL_PASS")
 
 app = FastAPI()
 
@@ -26,13 +32,13 @@ ALLOWED_STATUS = {"To Do", "In Progress", "Done"}
 
 class User(BaseModel):
     username: str
+    email: str
     password: str
-
 
 class TaskAdd(BaseModel):
     task_name: str
     priority: str
-
+    deadline: str
 
 class StatusUpdate(BaseModel):
     task_id: int
@@ -42,6 +48,76 @@ class StatusUpdate(BaseModel):
 # --------------------
 # JWT Functions
 # --------------------
+
+def send_email(to_email, subject, message):
+
+    msg = MIMEText(message)
+
+    msg["Subject"] = subject
+    msg["From"] = EMAIL_USER
+    msg["To"] = to_email
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+
+    server.starttls()
+
+    server.login(EMAIL_USER, EMAIL_PASS)
+
+    server.sendmail(EMAIL_USER, to_email, msg.as_string())
+
+    server.quit()
+
+def send_task_reminders():
+
+    conn = get_connection()
+
+    cur = conn.cursor()
+
+    deadline_limit = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+
+    cur.execute("""
+
+SELECT Tasks.task_id, Tasks.task_name, Tasks.status, Tasks.deadline, User.email
+
+FROM Tasks
+
+JOIN User ON Tasks.username = User.username
+
+WHERE deadline<=? AND reminder_sent=0
+
+""", (deadline_limit,))
+
+    rows = cur.fetchall()
+
+    for r in rows:
+
+        subject = "Task Reminder"
+
+        message = f"""
+Reminder for your task:
+
+Task: {r['task_name']}
+Status: {r['status']}
+Deadline: {r['deadline']}
+
+Please complete it on time.
+"""
+
+        send_email(r["email"], subject, message)
+
+    cur.execute("""
+
+    UPDATE Tasks
+
+    SET reminder_sent=1
+
+    WHERE task_id=?
+
+    """, (r["task_id"],))
+
+    conn.commit()
+
+    conn.close()
 
 def create_token(username):
 
@@ -90,12 +166,9 @@ def signup(user: User):
     hashed = bcrypt.hashpw(user.password.encode(), bcrypt.gensalt())
 
     cur.execute(
-
-        "INSERT INTO User(username,password) VALUES (?,?)",
-
-        (user.username, hashed)
-
-    )
+    "INSERT INTO User(username,email,password) VALUES (?,?,?)",
+    (user.username, user.email, hashed)
+)
 
     conn.commit()
 
@@ -145,11 +218,11 @@ def add_task(task: TaskAdd, username=Depends(get_current_user)):
 
     cur.execute("""
 
-    INSERT INTO Tasks(username,task_name,priority,status)
+    INSERT INTO Tasks(username,task_name,priority,status,deadline)
 
-    VALUES (?,?,?,?)
+    VALUES (?,?,?,?,?)
 
-    """, (username, task.task_name, task.priority, "To Do"))
+    """, (username, task.task_name, task.priority, "To Do", task.deadline))
 
     conn.commit()
 
@@ -219,7 +292,7 @@ def show_tasks(username=Depends(get_current_user)):
 
     cur.execute("""
 
-    SELECT task_id, task_name, priority, status
+    SELECT task_id, task_name, priority, status,deadline
 
     FROM Tasks
 
@@ -243,7 +316,9 @@ def show_tasks(username=Depends(get_current_user)):
 
             "priority": r["priority"],
 
-            "status": r["status"]
+            "status": r["status"],
+
+            "deadline": r["deadline"]
 
         })
 
@@ -261,7 +336,7 @@ def search_task(query: str, username=Depends(get_current_user)):
 
     cur.execute("""
 
-    SELECT task_id, task_name, priority, status
+    SELECT task_id, task_name, priority, status, deadline
 
     FROM Tasks
 
@@ -285,8 +360,17 @@ def search_task(query: str, username=Depends(get_current_user)):
 
             "priority": r["priority"],
 
-            "status": r["status"]
+            "status": r["status"],
+
+            "deadline": r["deadline"]
 
         })
 
+
     return tasks
+
+scheduler = BackgroundScheduler()
+
+scheduler.add_job(send_task_reminders, "interval", hours=24)
+
+scheduler.start()
