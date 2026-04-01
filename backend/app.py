@@ -76,15 +76,12 @@ def send_task_reminders():
     deadline_limit = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
 
     cur.execute("""
-
 SELECT Tasks.task_id, Tasks.task_name, Tasks.status, Tasks.deadline, User.email
-
 FROM Tasks
-
 JOIN User ON Tasks.username = User.username
-
-WHERE deadline<=? AND reminder_sent=0
-
+WHERE deadline <= ?
+AND reminder_sent = 0
+AND status IN ('To Do', 'In Progress')
 """, (deadline_limit,))
 
     rows = cur.fetchall()
@@ -373,11 +370,6 @@ scheduler = BackgroundScheduler()
 
 from datetime import datetime
 
-scheduler.add_job(
-    send_task_reminders,
-    "interval",
-    hours=24,
-    next_run_time=datetime.now()   # 👈 THIS is the fix
-)
+scheduler.add_job(send_task_reminders, "interval", minutes=1)
 
 scheduler.start()
