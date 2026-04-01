@@ -371,6 +371,13 @@ def search_task(query: str, username=Depends(get_current_user)):
 
 scheduler = BackgroundScheduler()
 
-scheduler.add_job(send_task_reminders, "interval", hours=24)
+from datetime import datetime
+
+scheduler.add_job(
+    send_task_reminders,
+    "interval",
+    hours=24,
+    next_run_time=datetime.now()   # 👈 THIS is the fix
+)
 
 scheduler.start()
