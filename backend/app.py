@@ -11,6 +11,8 @@ from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 load_dotenv()
 
@@ -20,13 +22,14 @@ EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
 
 app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # or ["http://localhost:3000"]
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
+# Serve static files (CSS, JS)
+app.mount("/static", StaticFiles(directory="../frontend"), name="static")
+
+# Serve signin.html
+@app.get("/")
+def serve_home():
+    return FileResponse(os.path.join("../frontend", "signin.html"))
 
 init_db()
 
