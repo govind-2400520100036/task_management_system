@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow - Manage your tasks with a Kanban board">
+  <title>TaskFlow - Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">TaskFlow</div>
+
+  <div class="nav-right">
+    <span id="user-greeting"></span>
+    <button class="logout-btn" id="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<!-- TASK INPUT BAR -->
+<div class="task-bar">
+  <input id="task-title" placeholder="Enter new task..." autocomplete="off">
+
+  <input type="date" id="task-deadline">
+
+  <select id="task-priority">
+    <option value="Low">Low</option>
+    <option value="Medium" selected>Medium</option>
+    <option value="High">High</option>
+  </select>
+
+  <button class="add-btn" id="add-task-btn" onclick="addTask()">Add Task +</button>
+</div>
+
+<!-- SEARCH BAR -->
+<div class="search-bar">
+  <input id="search-input" placeholder="Search tasks..." autocomplete="off" oninput="searchTasks()">
+</div>
+
+<!-- KANBAN BOARD -->
+<div class="board">
+
+  <div class="column" id="col-todo"
+       ondragover="allowDrop(event)" ondrop="drop(event, 'To Do')"
+       ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+    <h3>📌 To Do</h3>
+    <div id="todo"></div>
+  </div>
+
+  <div class="column" id="col-progress"
+       ondragover="allowDrop(event)" ondrop="drop(event, 'In Progress')"
+       ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+    <h3>🚧 In Progress</h3>
+    <div id="progress"></div>
+  </div>
+
+  <div class="column" id="col-done"
+       ondragover="allowDrop(event)" ondrop="drop(event, 'Done')"
+       ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+    <h3>✅ Done</h3>
+    <div id="done"></div>
+  </div>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
