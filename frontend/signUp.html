@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign up for TaskFlow - Organize your tasks with a simple Kanban board">
+  <title>Sign Up - TaskFlow</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
 
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">TaskFlow</div>
+</div>
+
+<!-- SIGNUP CARD -->
+<div class="auth-page">
+  <div class="card">
+    <h2>Join TaskFlow</h2>
+    <p class="subtitle">Start organizing your work today</p>
+
+    <div class="form-group">
+      <label for="username">Choose Username</label>
+      <input id="username" type="text" placeholder="Enter username" autocomplete="username">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email ID</label>
+      <input id="email" type="email" placeholder="Enter email" autocomplete="email">
+    </div>
+
+    <div class="form-group">
+  <label for="password">Create Password</label>
+  <div class="password-wrapper" style="position: relative;">
+    <input id="password" type="password" placeholder="Enter password" autocomplete="new-password" style="width: 100%; padding-right: 40px;">
+    <span id="togglePassword" onclick="togglePasswordVisibility()" 
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">
+      👁️
+    </span>
+  </div>
+</div>
+    <button class="btn-primary" id="signup-btn" onclick="signup()">Sign Up</button>
+
+    <p class="switch-link">Already have an account? <a href="signin.html">Log in</a></p>
+  </div>
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
