@@ -24,12 +24,21 @@ EMAIL_PASS = os.getenv("EMAIL_PASS")
 app = FastAPI()
 
 # Serve static files (CSS, JS)
-app.mount("/static", StaticFiles(directory="../frontend"), name="static")
+app.mount("/static", StaticFiles(directory="../frontend"), name="static"
 
-# Serve signin.html
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 @app.get("/")
-def serve_home():
-    return FileResponse(os.path.join("../frontend", "signin.html"))
+def signin_page():
+    return FileResponse(os.path.join(BASE_DIR, "frontend", "signin.html"))
+
+@app.get("/signup")
+def signup_page():
+    return FileResponse(os.path.join(BASE_DIR, "frontend", "signup.html"))
+
+@app.get("/home")
+def home_page():
+    return FileResponse(os.path.join(BASE_DIR, "frontend", "home.html"))
 
 init_db()
 
