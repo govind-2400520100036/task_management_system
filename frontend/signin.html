@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Log in to TaskFlow - Manage your tasks efficiently">
+  <title>Login - TaskFlow</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">TaskFlow</div>
+</div>
+
+<!-- LOGIN CARD -->
+<div class="auth-page">
+  <div class="card">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Log in to manage your tasks</p>
+
+    <div class="form-group">
+      <label for="identifier">Username</label>
+      <input id="identifier" type="text" placeholder="Enter username" autocomplete="username">
+    </div>
+    
+
+    <div class="form-group">
+  <label for="password">Password</label>
+  <div class="password-wrapper" style="position: relative;">
+    <input id="password" type="password" placeholder="Enter password" autocomplete="current-password" style="width: 100%; padding-right: 40px;">
+    <span id="togglePassword" onclick="togglePasswordVisibility()" 
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">
+      👁️
+    </span>
+  </div>
+</div>
+
+    <button class="btn-primary" id="login-btn" onclick="login()">Login</button>
+
+    <p class="switch-link">New here? <a href="signup.html">Create an account</a></p>
+  </div>
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
