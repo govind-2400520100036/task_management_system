@@ -24,7 +24,7 @@ EMAIL_PASS = os.getenv("EMAIL_PASS")
 app = FastAPI()
 
 # Serve static files (CSS, JS)
-app.mount("/static", StaticFiles(directory="../frontend"), name="static"
+app.mount("/static", StaticFiles(directory="../frontend"), name="static")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
