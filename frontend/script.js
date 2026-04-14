@@ -46,7 +46,7 @@ async function signup() {
     }
 
     alert("Signup successful! Please sign in.");
-    window.location.href = "signin.html";
+    window.location.href = "/";
 
   } catch (err) {
     alert("Server error. Make sure the backend is running.");
@@ -78,7 +78,7 @@ async function login() {
     localStorage.setItem("token", data.token);
     localStorage.setItem("username", username);
 
-    window.location.href = "home.html";
+    window.location.href = "/home";
 
   } catch (err) {
     alert("Server error.");
@@ -89,7 +89,7 @@ async function login() {
 // ================ LOGOUT ================
 function logout() {
   localStorage.clear();
-  window.location.href = "signin.html";
+  window.location.href = "/";
 }
 
 // ================ HOME PAGE INIT ================
@@ -98,7 +98,7 @@ function initHomePage() {
   const username = localStorage.getItem("username");
 
   if (!token) {
-    window.location.href = "signin.html";
+    window.location.href = "/";
     return;
   }
 
